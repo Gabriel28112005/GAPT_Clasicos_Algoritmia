@@ -1,3 +1,5 @@
+package juegos;
+
 public abstract class Figura {
     protected String nombre;
 
@@ -5,8 +7,8 @@ public abstract class Figura {
         this.nombre = nombre;
     }
 
-    @Override
+    @Override //Para sobreescribir
     public String toString() {
         return nombre;
     }
-} // Fin de la clase Figura
+} // Fin de la clase juegos.Figura

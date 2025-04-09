@@ -1,3 +1,5 @@
+package juegos;
+
 public class Matriz<T> {
     public T[][] datos;
     public int filas;
@@ -26,4 +28,4 @@ public class Matriz<T> {
         datos[filaDestino][colDestino] = datos[filaOrigen][colOrigen];
         datos[filaOrigen][colOrigen] = null;
     }
-} //Fin de la clase Matriz
+} //Fin de la clase juegos.Matriz
