@@ -16,16 +16,26 @@ public class Controlador_Hanoi {
     }
 
     private void iniciarEventos() {
-        vista.getBotonIniciar().addActionListener(e -> {
-            String texto = vista.getCampoDiscos().getText();
-            try {
-                int numDiscos = Integer.parseInt(texto);
-                if (numDiscos <= 0) throw new NumberFormatException();
+        vista.getBotonIniciar().addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                // Obtener el texto del campo de discos
+                String texto = vista.getCampoDiscos().getText();
 
-                modelo.solve(numDiscos);
-                vista.getEtiquetaMovimientos().setText("Mínimo de movimientos: " + modelo.numeroDeMovimientos);
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(vista, "Por favor, ingrese un número entero mayor que 0.", "Error", JOptionPane.ERROR_MESSAGE);
+                // Intentar convertir el texto a un número entero
+                try {
+                    int numDiscos = Integer.parseInt(texto);
+
+                    // Verificar que el número sea mayor que 0
+                    if (numDiscos > 0) {
+                        modelo.solve(numDiscos); // Ejecutar el modelo
+                        vista.getEtiquetaMovimientos().setText("Mínimo de movimientos: " + modelo.numeroDeMovimientos);
+                    } else {
+                        JOptionPane.showMessageDialog(vista, "Debe ingresar un número mayor que 0.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException error) {
+                    JOptionPane.showMessageDialog(vista, "Ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
