@@ -7,7 +7,6 @@ public abstract class Figura {
         this.nombre = nombre;
     }
 
-    @Override //Para sobreescribir
     public String toString() {
         return nombre;
     }

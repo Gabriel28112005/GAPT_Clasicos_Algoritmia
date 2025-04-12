@@ -1,14 +1,14 @@
 package juegos;
 
 public class Matriz<T> {
-    public T[][] datos;
+    public Object[][] datos;
     public int filas;
     public int columnas;
 
     public Matriz(int filas, int columnas) {
         this.filas = filas;
         this.columnas = columnas;
-        datos = (T[][]) new Object[filas][columnas];
+        this.datos = new Object[filas][columnas]; // ← NO hay cast aquí
     }
 
     public void imprimir() {
@@ -28,4 +28,4 @@ public class Matriz<T> {
         datos[filaDestino][colDestino] = datos[filaOrigen][colOrigen];
         datos[filaOrigen][colOrigen] = null;
     }
-} //Fin de la clase juegos.Matriz
+} //Fin de la clase Matriz

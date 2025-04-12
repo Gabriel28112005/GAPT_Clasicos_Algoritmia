@@ -8,59 +8,87 @@ public class Vista_Caballo extends JFrame {
     private JTextField campoFila;
     private JTextField campoColumna;
     private JButton botonResolver;
-    private JLabel etiquetaResultado;
 
-    public CaballoVista() {
+    private Integer[][] datos;
+    private int dimension;
+    private JPanel panelTablero;
+
+    public Vista_Caballo() {
         setTitle("Problema del Caballo");
-        setSize(400, 220);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(600, 650);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         inicializarComponentes();
     }
 
     private void inicializarComponentes() {
-        JPanel panel = new JPanel(new GridLayout(5, 2, 5, 5));
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setLayout(new BorderLayout());
 
-        panel.add(new JLabel("Tamaño del tablero (n):"));
+        JPanel panelSuperior = new JPanel(new GridLayout(4, 2, 10, 10));
+        panelSuperior.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        panelSuperior.add(new JLabel("Tamaño del tablero:"));
         campoTamaño = new JTextField();
-        panel.add(campoTamaño);
+        panelSuperior.add(campoTamaño);
 
-        panel.add(new JLabel("Fila inicial:"));
+        panelSuperior.add(new JLabel("Fila inicial:"));
         campoFila = new JTextField();
-        panel.add(campoFila);
+        panelSuperior.add(campoFila);
 
-        panel.add(new JLabel("Columna inicial:"));
+        panelSuperior.add(new JLabel("Columna inicial:"));
         campoColumna = new JTextField();
-        panel.add(campoColumna);
+        panelSuperior.add(campoColumna);
 
         botonResolver = new JButton("Resolver");
-        panel.add(botonResolver);
+        panelSuperior.add(botonResolver);
+        panelSuperior.add(new JLabel("")); // espacio vacío
 
-        etiquetaResultado = new JLabel("");
-        panel.add(etiquetaResultado);
+        add(panelSuperior, BorderLayout.NORTH);
 
-        add(panel);
+        panelTablero = new JPanel() {
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+
+                if (datos == null || dimension == 0) return;
+
+                int ancho = getWidth() / dimension;
+                int alto = getHeight() / dimension;
+
+                for (int i = 0; i < dimension; i++) {
+                    for (int j = 0; j < dimension; j++) {
+                        if ((i + j) % 2 == 0) {
+                            g.setColor(Color.WHITE);
+                        } else {
+                            g.setColor(Color.LIGHT_GRAY);
+                        }
+                        g.fillRect(j * ancho, i * alto, ancho, alto);
+
+                        if (datos[i][j] != null) {
+                            g.setColor(Color.BLUE);
+                            g.setFont(new Font("Monospaced", Font.BOLD, alto / 2));
+                            String texto = datos[i][j].toString();
+                            FontMetrics fm = g.getFontMetrics();
+                            int x = j * ancho + (ancho - fm.stringWidth(texto)) / 2;
+                            int y = i * alto + (alto + fm.getAscent()) / 2 - 5;
+                            g.drawString(texto, x, y);
+                        }
+                    }
+                }
+            }
+        };
+
+        panelTablero.setPreferredSize(new Dimension(600, 550));
+        add(panelTablero, BorderLayout.CENTER);
     }
 
-    public JTextField getCampoTamaño() {
-        return campoTamaño;
-    }
+    public JTextField getCampoTamaño() { return campoTamaño; }
+    public JTextField getCampoFila() { return campoFila; }
+    public JTextField getCampoColumna() { return campoColumna; }
+    public JButton getBotonResolver() { return botonResolver; }
 
-    public JTextField getCampoFila() {
-        return campoFila;
+    public void actualizarTablero(Integer[][] nuevosDatos, int dimension) {
+        this.datos = nuevosDatos;
+        this.dimension = dimension;
+        panelTablero.repaint();
     }
-
-    public JTextField getCampoColumna() {
-        return campoColumna;
-    }
-
-    public JButton getBotonResolver() {
-        return botonResolver;
-    }
-
-    public JLabel getEtiquetaResultado() {
-        return etiquetaResultado;
-    }
-
-} //Fin de la clase Vista Caballo
+}

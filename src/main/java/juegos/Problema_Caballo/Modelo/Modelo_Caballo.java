@@ -1,56 +1,96 @@
 package juegos.Problema_Caballo.Modelo;
 
-import juegos.Figura;
-import juegos.Problema_Caballo.Caballo;
 import juegos.Matriz;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class Modelo_Caballo {
-    public Matriz<Figura> tablero;
-    public int numeroDeMovimientos;
+    private Matriz<Integer> tablero;
     private int dimension;
 
     private final int[] dx = {2, 1, -1, -2, -2, -1, 1, 2};
     private final int[] dy = {1, 2, 2, 1, -1, -2, -2, -1};
 
-    public void resolver(int n, int filaInicio, int colInicio) {
+    public boolean resolver(int n, int filaInicio, int colInicio) {
         this.dimension = n;
         this.tablero = new Matriz<>(n, n);
-        this.numeroDeMovimientos = 0;
-
-        if (moverCaballo(filaInicio, colInicio, 1)) {
-            System.out.println("Recorrido completado:");
-        } else {
-            System.out.println("No se pudo completar el recorrido.");
-        }
-
-        tablero.imprimir();
-        System.out.println("Movimientos realizados: " + numeroDeMovimientos);
+        return moverCaballo(filaInicio, colInicio, 1);
     }
 
     private boolean moverCaballo(int fila, int col, int paso) {
-        if (fila < 0 || fila >= dimension || col < 0 || col >= dimension) return false;
-        if (tablero.datos[fila][col] != null) return false;
+        if (fila < 0 || fila >= dimension || col < 0 || col >= dimension) {
+            return false;
+        }
 
-        tablero.datos[fila][col] = new Caballo() {
-            @Override
-            public String toString() {
-                return String.valueOf(paso);
+        if (tablero.datos[fila][col] != null) {
+            return false;
+        }
+
+        tablero.datos[fila][col] = paso;
+
+        if (paso == dimension * dimension) {
+            return true;
+        }
+
+        List<int[]> movimientos = obtenerMovimientosOrdenados(fila, col);
+
+        for (int[] mov : movimientos) {
+            int nuevaFila = mov[0];
+            int nuevaCol = mov[1];
+            if (moverCaballo(nuevaFila, nuevaCol, paso + 1)) {
+                return true;
             }
-        };
+        }
 
-        numeroDeMovimientos++;
+        tablero.datos[fila][col] = null;
+        return false;
+    }
 
-        if (paso == dimension * dimension) return true;
+    private List<int[]> obtenerMovimientosOrdenados(int fila, int col) {
+        List<int[]> movimientos = new ArrayList<>();
 
         for (int i = 0; i < 8; i++) {
             int nuevaFila = fila + dx[i];
             int nuevaCol = col + dy[i];
-            if (moverCaballo(nuevaFila, nuevaCol, paso + 1)) return true;
+
+            if (esValido(nuevaFila, nuevaCol)) {
+                int accesibilidad = contarMovimientosDisponibles(nuevaFila, nuevaCol);
+                movimientos.add(new int[]{nuevaFila, nuevaCol, accesibilidad});
+            }
         }
 
-        tablero.datos[fila][col] = null; // backtrack
-        numeroDeMovimientos--;
-        return false;
+        movimientos.sort(Comparator.comparingInt(a -> a[2]));
+
+        List<int[]> resultado = new ArrayList<>();
+        for (int[] mov : movimientos) {
+            resultado.add(new int[]{mov[0], mov[1]});
+        }
+        return resultado;
     }
 
-} //Fin de la clase Modelo Caballo
+    private boolean esValido(int fila, int col) {
+        return fila >= 0 && fila < dimension && col >= 0 && col < dimension && tablero.datos[fila][col] == null;
+    }
+
+    private int contarMovimientosDisponibles(int fila, int col) {
+        int contador = 0;
+        for (int i = 0; i < 8; i++) {
+            int nuevaFila = fila + dx[i];
+            int nuevaCol = col + dy[i];
+            if (esValido(nuevaFila, nuevaCol)) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+
+    public Matriz<Integer> getTablero() {
+        return tablero;
+    }
+
+    public int getDimension() {
+        return dimension;
+    }
+}

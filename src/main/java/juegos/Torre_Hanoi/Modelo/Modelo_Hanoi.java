@@ -49,7 +49,7 @@ public class Modelo_Hanoi {
         if (filaOrigen == -1 || filaDestino == -1) return;
 
         matriz.trasladar(filaOrigen, origen, filaDestino, destino);
-        Figura disco = matriz.datos[filaDestino][destino];
+        Figura disco = (Figura) matriz.datos[filaDestino][destino];
 
         System.out.println("Mover " + disco + " de " + (char) ('A' + origen) + " a " + (char) ('A' + destino));
         matriz.imprimir();
