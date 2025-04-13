@@ -3,6 +3,7 @@ package juegos.Torre_Hanoi.Modelo;
 import juegos.Torre_Hanoi.Disco;
 import juegos.Figura;
 import juegos.Matriz;
+import juegos.Torre_Hanoi.Vista.Vista_Hanoi;
 
 import java.awt.Color;
 import java.util.Random;
@@ -10,14 +11,16 @@ import java.util.Random;
 public class Modelo_Hanoi {
     private Matriz<Figura> matriz;
     private int numDiscos;
-
     public int numeroDeMovimientos;
+    private Vista_Hanoi vista;
+
+    public void setVista(Vista_Hanoi vista) {
+        this.vista = vista;
+    }
 
     public void solve(int numDiscos) {
         this.numDiscos = numDiscos;
-        this.numeroDeMovimientos = (int) Math.pow(2, numDiscos) - 1; // 2^n - 1
-        System.out.println("Número de movimientos necesarios: " + numeroDeMovimientos);
-
+        this.numeroDeMovimientos = (int) Math.pow(2, numDiscos) - 1;
         matriz = new Matriz<>(numDiscos, 3);
 
         for (int i = 0; i < numDiscos; i++) {
@@ -27,9 +30,7 @@ public class Modelo_Hanoi {
             matriz.datos[i][0] = disco;
         }
 
-        System.out.println("Estado inicial:");
-        matriz.imprimir();
-
+        vista.mostrarEstado(matriz);
         moverDiscos(numDiscos, 0, 2, 1);
     }
 
@@ -49,10 +50,13 @@ public class Modelo_Hanoi {
         if (filaOrigen == -1 || filaDestino == -1) return;
 
         matriz.trasladar(filaOrigen, origen, filaDestino, destino);
-        Figura disco = (Figura) matriz.datos[filaDestino][destino];
 
-        System.out.println("Mover " + disco + " de " + (char) ('A' + origen) + " a " + (char) ('A' + destino));
-        matriz.imprimir();
+        vista.mostrarEstado(matriz);
+        try {
+            Thread.sleep(500); // animación entre pasos
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private int buscarDiscoSuperior(int columna) {
@@ -73,4 +77,4 @@ public class Modelo_Hanoi {
         Random r = new Random();
         return new Color(r.nextInt(156) + 100, r.nextInt(156) + 100, r.nextInt(156) + 100);
     }
-}
+} //Fin de la clase Modelo_Hanoi
