@@ -8,6 +8,7 @@ public class Vista_Caballo extends JFrame {
     private JTextField campoFila;
     private JTextField campoColumna;
     private JButton botonResolver;
+    private JButton botonVolver;
 
     private Integer[][] datos;
     private int dimension;
@@ -15,7 +16,7 @@ public class Vista_Caballo extends JFrame {
 
     public Vista_Caballo() {
         setTitle("Problema del Caballo");
-        setSize(600, 650);
+        setSize(600, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         inicializarComponentes();
@@ -24,7 +25,7 @@ public class Vista_Caballo extends JFrame {
     private void inicializarComponentes() {
         setLayout(new BorderLayout());
 
-        JPanel panelSuperior = new JPanel(new GridLayout(4, 2, 10, 10));
+        JPanel panelSuperior = new JPanel(new GridLayout(5, 2, 10, 10));
         panelSuperior.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         panelSuperior.add(new JLabel("Tamaño del tablero:"));
@@ -41,7 +42,9 @@ public class Vista_Caballo extends JFrame {
 
         botonResolver = new JButton("Resolver");
         panelSuperior.add(botonResolver);
-        panelSuperior.add(new JLabel("")); // espacio vacío
+
+        botonVolver = new JButton("← Volver al menú");
+        panelSuperior.add(botonVolver);
 
         add(panelSuperior, BorderLayout.NORTH);
 
@@ -85,6 +88,7 @@ public class Vista_Caballo extends JFrame {
     public JTextField getCampoFila() { return campoFila; }
     public JTextField getCampoColumna() { return campoColumna; }
     public JButton getBotonResolver() { return botonResolver; }
+    public JButton getBotonVolver() { return botonVolver; }
 
     public void actualizarTablero(Integer[][] nuevosDatos, int dimension) {
         this.datos = nuevosDatos;

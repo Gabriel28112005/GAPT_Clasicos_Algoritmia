@@ -2,7 +2,6 @@ package juegos.Problema_Caballo.Modelo;
 
 import juegos.Matriz;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
