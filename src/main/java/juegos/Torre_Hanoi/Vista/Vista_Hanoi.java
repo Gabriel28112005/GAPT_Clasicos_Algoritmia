@@ -15,7 +15,7 @@ public class Vista_Hanoi extends JFrame {
 
     public Vista_Hanoi() {
         setTitle("Torre de Hanoi");
-        setSize(600, 600);
+        setSize(500, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         inicializarComponentes();
@@ -44,7 +44,7 @@ public class Vista_Hanoi extends JFrame {
                 super.paintComponent(g);
             }
         };
-        panelVisual.setPreferredSize(new Dimension(600, 400));
+        panelVisual.setPreferredSize(new Dimension(500, 350));
         add(panelVisual, BorderLayout.CENTER);
     }
 
@@ -91,12 +91,12 @@ public class Vista_Hanoi extends JFrame {
             g.fillRoundRect(baseX, baseY, torreAncho - 20, 15, 10, 10);
         }
 
-        // Dibujar discos desde la base según su posición real en la matriz
+        // Dibujar discos desde la base hacia arriba según su nivel real
         for (int c = 0; c < columnas; c++) {
             int nivel = 0;
             for (int f = filas - 1; f >= 0; f--) {
-                Object obj = matriz.datos[f][c];
-                if (obj instanceof Disco disco) {
+                Figura figura = (Figura) matriz.datos[f][c];
+                if (figura instanceof Disco disco) {
                     int tamaño = disco.getTamaño();
                     int discoAncho = tamaño * (torreAncho / filas);
 

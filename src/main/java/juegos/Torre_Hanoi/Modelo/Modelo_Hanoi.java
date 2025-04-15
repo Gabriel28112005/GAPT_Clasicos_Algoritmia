@@ -5,6 +5,7 @@ import juegos.Figura;
 import juegos.Matriz;
 import juegos.Torre_Hanoi.Vista.Vista_Hanoi;
 
+import javax.swing.*;
 import java.awt.Color;
 import java.util.Random;
 
@@ -23,14 +24,26 @@ public class Modelo_Hanoi {
         this.numeroDeMovimientos = (int) Math.pow(2, numDiscos) - 1;
         matriz = new Matriz<>(numDiscos, 3);
 
-        for (int i = 0; i < numDiscos; i++) {
-            int tamaño = numDiscos - i;
+        // Colocar los discos desde la base hacia arriba (mayor tamaño abajo)
+        for (int i = numDiscos; i >= 1; i--) {
+            int tamaño = i + 1; // Disco más grande tiene mayor tamaño
             Color color = generarColorAleatorio();
             Disco disco = new Disco(tamaño, color);
-            matriz.datos[i][0] = disco;
+            matriz.datos[i-1][0] = disco; // Base está en la última fila
         }
 
-        vista.mostrarEstado(matriz);
+
+        // Mostrar el estado inicial en la GUI
+        SwingUtilities.invokeLater(() -> vista.mostrarEstado(matriz));
+
+        // Espera para mostrar el estado inicial
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Iniciar movimientos
         moverDiscos(numDiscos, 0, 2, 1);
     }
 
@@ -51,9 +64,12 @@ public class Modelo_Hanoi {
 
         matriz.trasladar(filaOrigen, origen, filaDestino, destino);
 
-        vista.mostrarEstado(matriz);
+        // Actualizar visualmente
+        SwingUtilities.invokeLater(() -> vista.mostrarEstado(matriz));
+
+        // Esperar para animación
         try {
-            Thread.sleep(500); // animación entre pasos
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

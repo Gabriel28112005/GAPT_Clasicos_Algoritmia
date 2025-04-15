@@ -11,19 +11,6 @@ public class Matriz<T> {
         this.datos = new Object[filas][columnas]; // ← NO hay cast aquí
     }
 
-    public void imprimir() {
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
-                if (datos[i][j] != null) {
-                    System.out.print(datos[i][j] + "\t");
-                } else {
-                    System.out.print(".\t");
-                }
-            }
-            System.out.println();
-        }
-    }
-
     public void trasladar(int filaOrigen, int colOrigen, int filaDestino, int colDestino) {
         datos[filaDestino][colDestino] = datos[filaOrigen][colOrigen];
         datos[filaOrigen][colOrigen] = null;
