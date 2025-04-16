@@ -20,7 +20,7 @@ public class Modelo_Hanoi {
         this.vista = vista;
     }
 
-    @SuppressWarnings("unchecked")
+
     public void solve(int numDiscos) {
         this.numDiscos = numDiscos;
         this.numeroDeMovimientos = (int) Math.pow(2, numDiscos) - 1;
