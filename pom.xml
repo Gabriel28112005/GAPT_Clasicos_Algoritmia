@@ -23,7 +23,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>juegos.Problema_Caballo.Main_caballo</mainClass>
+                    <mainClass>juegos.main_juegos.Main_Caballo</mainClass>
                 </configuration>
             </plugin>
         </plugins>

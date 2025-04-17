@@ -1,8 +1,8 @@
-package juegos.N_Reinas;
+package juegos.main_juegos;
 
-import juegos.N_Reinas.Vista.Vista_Reina;
-import juegos.N_Reinas.Modelo.Modelo_Reina;
-import juegos.N_Reinas.Controlador.Controlador_Reina;
+import juegos.vistas.Vista_Reina;
+import juegos.modelos.Modelo_Reina;
+import juegos.controlador.Controlador_Reina;
 
 import javax.swing.*;
 
@@ -14,5 +14,7 @@ public class Main_Reina {
             new Controlador_Reina(vista, modelo);
             vista.setVisible(true);
         });
+
     }
+
 }//Fin del Main_Reina

@@ -1,10 +1,10 @@
-package juegos.Torre_Hanoi.Vista;
+package juegos.vistas;
 
 import javax.swing.*;
 import java.awt.*;
-import juegos.Matriz;
-import juegos.Figura;
-import juegos.Torre_Hanoi.Disco;
+import juegos.clases.Matriz;
+import juegos.clases.Figura;
+import juegos.clases.Disco;
 
 public class Vista_Hanoi extends JFrame {
     private JTextField campoDiscos;
@@ -110,8 +110,13 @@ public class Vista_Hanoi extends JFrame {
                     g2d.drawRoundRect(x, y, discoAncho, discoAltura - 4, 20, 20);
 
                     nivel++;
+
                 }
+
             }
+
         }
+
     }
-}
+
+} //Fin de la clase Vista_Hanoi

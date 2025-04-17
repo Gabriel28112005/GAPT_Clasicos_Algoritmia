@@ -1,9 +1,8 @@
-package juegos.Problema_Caballo;
-
-import juegos.Figura;
+package juegos.clases;
 
 public class Caballo extends Figura {
     public Caballo() {
         super("♞");
     }
+
 } //Fin de la clase Caballo

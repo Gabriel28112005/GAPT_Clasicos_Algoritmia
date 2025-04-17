@@ -1,4 +1,4 @@
-package juegos;
+package juegos.clases;
 
 public abstract class Figura {
     protected String nombre;
@@ -10,4 +10,5 @@ public abstract class Figura {
     public String toString() {
         return nombre;
     }
-} // Fin de la clase juegos.Figura
+
+} // Fin de la clase juegos.clases.Figura

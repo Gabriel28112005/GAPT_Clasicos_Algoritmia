@@ -1,4 +1,4 @@
-package juegos;
+package juegos.clases;
 
 public class Matriz<T> {
     public Object[][] datos;
@@ -11,8 +11,4 @@ public class Matriz<T> {
         this.datos = new Object[filas][columnas]; // ← NO hay cast aquí
     }
 
-    public void trasladar(int filaOrigen, int colOrigen, int filaDestino, int colDestino) {
-        datos[filaDestino][colDestino] = datos[filaOrigen][colOrigen];
-        datos[filaOrigen][colOrigen] = null;
-    }
 } //Fin de la clase Matriz

@@ -1,7 +1,6 @@
-package juegos.Torre_Hanoi;
+package juegos.clases;
 
 import java.awt.Color;
-import juegos.Figura;
 
 public class Disco extends Figura {
     private int tamaño;
@@ -20,4 +19,5 @@ public class Disco extends Figura {
     public Color getColor() {
         return color;
     }
+
 } //Fin de la clase Disco
