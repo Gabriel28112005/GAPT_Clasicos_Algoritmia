@@ -1,0 +1,45 @@
+@startuml Diagrama_Juegos_MVC
+
+skinparam componentStyle rectangle
+left to right direction
+
+' ==== Main ====
+component "Main\n(Selector de juegos)" as Main
+
+' ==== Hanoi ====
+package "Juego: Torre de Hanoi" {
+    component "Vista_Hanoi\n(JFrame + JPanel)" as Vista_Hanoi
+    component "Modelo_Hanoi\n(Lógica + Matriz)" as Modelo_Hanoi
+    component "Controlador_Hanoi\n(Gestión de eventos)" as Controlador_Hanoi
+}
+
+' ==== Caballo ====
+package "Juego: Problema del Caballo" {
+    component "Vista_Caballo\n(JFrame + JPanel)" as Vista_Caballo
+    component "Modelo_Caballo\n(Backtracking + Matriz)" as Modelo_Caballo
+    component "Controlador_Caballo\n(Gestión de eventos)" as Controlador_Caballo
+}
+
+' ==== Reinas ====
+package "Juego: Problema de las N Reinas" {
+    component "Vista_Reina\n(JFrame + JPanel)" as Vista_Reina
+    component "Modelo_Reina\n(Backtracking + Matriz)" as Modelo_Reina
+    component "Controlador_Reina\n(Gestión de eventos)" as Controlador_Reina
+}
+
+' ==== Relaciones desde Main ====
+Main --> Controlador_Hanoi : iniciar()
+Main --> Controlador_Caballo : iniciar()
+Main --> Controlador_Reina : iniciar()
+
+' ==== Relaciones internas MVC ====
+Controlador_Hanoi --> Vista_Hanoi
+Controlador_Hanoi --> Modelo_Hanoi
+
+Controlador_Caballo --> Vista_Caballo
+Controlador_Caballo --> Modelo_Caballo
+
+Controlador_Reina --> Vista_Reina
+Controlador_Reina --> Modelo_Reina
+
+@enduml
