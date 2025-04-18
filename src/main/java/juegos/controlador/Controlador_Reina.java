@@ -12,7 +12,7 @@ public class Controlador_Reina {
     private boolean solucionesCalculadas = false; // Indica si ya se calcularon soluciones para el valor actual
     private int ultimoTamaño = -1; // Guarda la dimensión del último tablero resuelto
 
-    // Constructor del controlador que recibe la vista y el modelo
+    // Constructor del controlador que recibe como parámetros la vista y el modelo
     public Controlador_Reina(Vista_Reina vista, Modelo_Reina modelo) {
         this.vista = vista;
         this.modelo = modelo;
@@ -21,7 +21,7 @@ public class Controlador_Reina {
 
     // Método que inicializa todos los eventos de la vista
     private void inicializarEventos() {
-        // Evento para el botón "Resolver"
+        // Acción que se ejecuta al pulsar el botón "Resolver"
         vista.getBotonResolver().addActionListener(e -> {
             try {
                 int n = Integer.parseInt(vista.getCampoDimension().getText()); // Obtiene la dimensión ingresada por el usuario
@@ -52,7 +52,7 @@ public class Controlador_Reina {
             }
         });
 
-        // Evento para el botón "Mostrar otra solución"
+        // Acción que se ejecuta al pulsar el botón "Mostrar otra solución"
         vista.getBotonMostrarOtra().addActionListener(e -> {
             // Solo se puede mostrar otra solución si ya se resolvió el problema
             if (solucionesCalculadas) {
@@ -60,7 +60,7 @@ public class Controlador_Reina {
             }
         });
 
-        // Evento para volver al menú principal
+        // Acción que se ejecuta al pulsar el botón "Volver al menú principal"
         vista.getBotonVolver().addActionListener(e -> {
             vista.dispose();      // Cierra la vista actual
             Main.main(null);      // Llama al menú principal

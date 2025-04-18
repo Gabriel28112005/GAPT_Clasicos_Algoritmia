@@ -11,7 +11,7 @@ public class Controlador_Caballo {
     private Vista_Caballo vista;
     private Modelo_Caballo modelo;
 
-    // Constructor que recibe la vista y el modelo, y configura los eventos.
+    // Constructor que recibe como parámetros la vista y el modelo
     public Controlador_Caballo(Vista_Caballo vista, Modelo_Caballo modelo) {
         this.vista = vista;
         this.modelo = modelo;
@@ -21,7 +21,7 @@ public class Controlador_Caballo {
     // Método privado que define los eventos de los botones de la vista.
     private void inicializarEventos() {
 
-        // Acción al pulsar el botón "Resolver":
+        // Acción que se ejecuta al pulsar el botón "Resolver":
         vista.getBotonResolver().addActionListener(e -> {
             try {
                 // Se obtienen y convierten los valores ingresados por el usuario.
@@ -87,7 +87,7 @@ public class Controlador_Caballo {
                             ex.printStackTrace();
                         }
                     }
-                }).start(); // Se inicia el hilo de animación.
+                }).start(); // Se inicia la animación.
 
             } catch (NumberFormatException ex) {
                 // Manejo de error si los campos no contienen números válidos.
@@ -97,7 +97,7 @@ public class Controlador_Caballo {
             }
         });
 
-        // Evento para el botón "Volver al menú principal"
+        // Acción que se ejecuta al pulsar el botón "Volver al menú principal"
         vista.getBotonVolver().addActionListener(e -> {
             vista.dispose(); // Se cierra la vista actual.
             Main.main(null); // Se invoca el menú principal.

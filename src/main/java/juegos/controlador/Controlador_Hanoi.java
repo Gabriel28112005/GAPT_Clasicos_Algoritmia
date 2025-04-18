@@ -10,16 +10,16 @@ public class Controlador_Hanoi {
     private Vista_Hanoi vista;
     private Modelo_Hanoi modelo;
 
-    // Constructor del controlador que recibe la vista y el modelo y registra los eventos
+    // Constructor del controlador que recibe como parámetros la vista y el modelo
     public Controlador_Hanoi(Vista_Hanoi vista, Modelo_Hanoi modelo) {
         this.vista = vista;
         this.modelo = modelo;
         iniciarEventos(); // Se inicializan los eventos de la interfaz
     }
 
-    // Método privado que asocia los eventos a los botones de la vista
+    // Método que asocia los eventos a los botones de la vista
     private void iniciarEventos() {
-        // Evento para el botón "Iniciar"
+        // Acción que se ejecuta al pulsar el botón "Iniciar"
         vista.getBotonIniciar().addActionListener(e -> {
             String texto = vista.getCampoDiscos().getText(); // Se obtiene el texto del campo de número de discos
 
@@ -30,7 +30,7 @@ public class Controlador_Hanoi {
                 if (numDiscos > 0) {
                     modelo.setVista(vista); // Se asocia la vista al modelo para permitirle actualizarla
 
-                    // ✅ Se inicia el algoritmo en un hilo separado para evitar que se congele la interfaz
+                    // Se inicia el algoritmo en un hilo separado para evitar que se congele la interfaz
                     new Thread(() -> {
                         modelo.solve(numDiscos); // Se ejecuta el algoritmo de resolución
 
@@ -57,7 +57,7 @@ public class Controlador_Hanoi {
             }
         });
 
-        // Evento para el botón "Volver al menú principal"
+        // Acción que se ejecuta al pulsar el botón "Volver al menú principal"
         vista.getBotonVolver().addActionListener(e -> {
             vista.dispose();     // Cierra la vista actual
             Main.main(null);     // Llama al método principal para volver al menú
