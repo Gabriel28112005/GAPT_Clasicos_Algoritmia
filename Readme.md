@@ -1,6 +1,6 @@
 # Clásicos de la algoritmia.
 
-### 📝 Definición general del proyecto
+## 📝 Definición general del proyecto
 🖥️ El programa, al ejecutarse, mostrará una ventana en la cual se le pedirá al usuario que elija uno de los siguientes tres juegos:
   - 🏯 La Torre de Hanoi.
   - 👑 El problema de las "n" reinas.
@@ -8,7 +8,7 @@
 
 🎯 Una vez el usuario haya realizado su elección, el programa deberá de resolver el ejercicio de la manera más eficiente y correcta posible. Además, deberá de mostrar el total de soluciones posibles (en el juego de El problema de las "n" reinas), el número total de movimientos hechos (en La Torre de Hanoi) o el recorrido de posiciones que debe seguirse (en El problema del caballo).
 
-### 🎮 Descripción de los juegos y parámetros a rellenar en los mismos
+## 🎮 Descripción de los juegos y parámetros a rellenar en los mismos
 - 🏯 La Torre de Hanoi:
    - 🎯 El objetivo del juego es mover una torre de discos, apilados desde el de mayor tamaño (la base) hasta el de menor tamaño (la cúspide), situados en la columna izquierda hasta la columna derecha siguiendo una serie de reglas:
      - 🔄 Solo se puede mover un disco por cada movimiento.
